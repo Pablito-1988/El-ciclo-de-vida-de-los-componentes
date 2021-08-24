@@ -25,22 +25,28 @@ class GenresInDb extends Component {
 
     
     componentDidMount() {
-        fetch('http://localhost:3006/api/genres')
+        console.log('%cel componente se montó', 'color:green')
+        fetch('/api/genres')
             .then(respuesta => {
                 return respuesta.json()
             })
             .then(genres => {
-                console.log(genres)
                 this.setState({ genreList: genres.data })
             })
             .catch(error => console.log(error))
     }
+    componentDidUpdate() {
+        console.log('%cel componente se actualizo', 'color:red')
+    }
+    componentWillUnmount() {
+        console.log('%cel componente se desmontó', 'color:blue')
+    }
 
     change(){
-        document.querySelector('.card-body').classList.toggle('bg-secondary')
+        document.querySelector('#cambio').classList.add('bg-secondary')
     }
     return(){
-        document.querySelector('.card-body').classList.remove('bg-secondary')
+        document.querySelector('#cambio').classList.remove('bg-secondary')
     }
     
     render() {
@@ -53,7 +59,7 @@ class GenresInDb extends Component {
                         <div className="card-header py-3">
                             <h6 onMouseOver={this.change} onMouseOut={this.return} className="m-0 font-weight-bold text-gray-800">Genres in Data Base</h6>
                         </div>
-                        <div className="card-body">
+                        <div id= 'cambio'className="card-body">
                             <div className="row">
                                 {this.state.genreList.map((genre, index) => {
                                     return <Genre {...genre} key={index} />

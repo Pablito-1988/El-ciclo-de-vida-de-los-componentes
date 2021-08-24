@@ -13,15 +13,22 @@ class Movie extends Component {
 
 
 	componentDidMount() {
-		fetch('http://localhost:3006/api/movies')
+		console.log('%cel componente se montó', 'color:green')
+		fetch('/api/movies')
 			.then(respuesta => {
 				return respuesta.json()
 			})
-			.then(genres => {
-				console.log(genres)
-				this.setState({ movieList: genres.data })
+			.then(movies => {
+				
+				this.setState({ movieList: movies.data })
 			})
 			.catch(error => console.log(error))
+	}
+	componentDidUpdate(){
+		console.log('%cel componente se actualizo','color:red')
+	}
+	componentWillUnmount() {
+		console.log('%cel componente se desmontó', 'color:blue')
 	}
 	render() {
 
